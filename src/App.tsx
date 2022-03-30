@@ -6,6 +6,7 @@ import RestartIcon from "./svgs/restart.svg"
 import { useEffect, useState } from "react";
 import { GridItemType } from "./types/GridItemType";
 import { items } from "./data/items";
+import { GridItem } from "./components/GridItem";
 
 const App = () => {
    const [playing, setPlaying] = useState<boolean>(false);
@@ -36,16 +37,25 @@ const App = () => {
 
       for(let w = 0; w < 2; w++){
          for(let i = 0; i < items.length; i++){
-            let pos = Math.floor(Math.random() * (items.length * 2));
+            let pos = -1;
+
+            //Executa até encontrar uma posição não preenchida
+            while(pos < 0 || tmpGrid[pos].item !== null){
+               pos = Math.floor(Math.random() * (items.length * 2));
+            }
+
             tmpGrid[pos].item = i;
          }
       }
-
 
       setGridItems(tmpGrid);
 
       //play game
       setPlaying(true);
+   }
+
+   const handleItemClick = (index: number) => {
+
    }
 
    return (
@@ -65,7 +75,13 @@ const App = () => {
 
          <C.GridArea>
             <C.Grid>
-
+               {gridItems.map((item, index)=>(
+                  <GridItem 
+                     key={index}
+                     item={item}
+                     onClick={() => handleItemClick (index)}
+                  />
+               ))}
             </C.Grid>
          </C.GridArea>
       </C.container>
