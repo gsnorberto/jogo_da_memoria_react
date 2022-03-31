@@ -14,7 +14,7 @@ export const GridItem = ({ item, onClick }: Props) => {
          {!item.permanentShown && !item.shown &&
             <C.Icon src={b7Svg} alt="image" opacity={.1}/>
          }
-         { (item.permanentShown || item.shown) && item.item !== null &&
+         {(item.permanentShown || item.shown) && item.item !== null &&
             <C.Icon src={items[item.item].icon} alt="image" />
          }
       </C.Container>
